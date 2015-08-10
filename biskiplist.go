@@ -110,14 +110,14 @@ func (sl *BiSkiplist) Contains(key string) bool {
 
 func (sl *BiSkiplist) Remove(key string) (interface{}, error) {
 	if node, ok := sl.nIndex[key]; ok && node != nil && node != sl.head {
+		delete(sl.nIndex, key)
 		for i := len(node.forward) - 1; i >= 0; i-- {
 			if node.forward[i] != nil {
 				node.forward[i].backward[i] = node.backward[i]
 			}
 			node.backward[i].forward[i] = node.forward[i]
-			delete(sl.nIndex, key)
-			return node.value, nil
 		}
+		return node.value, nil
 	}
 	return nil, NoExistKeyErr
 }

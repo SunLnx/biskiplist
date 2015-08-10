@@ -23,36 +23,13 @@ func TestBiSkiplistInsert(t *testing.T) {
 	}
 }
 
-/*
-
-func TestNormalListInsert(t *testing.T) {
-	var (
-		key   string
-		score int64
-		value int
-	)
-	type node struct {
-		key   string
-		score int64
-		value interface{}
-		next  *node
-	}
-	head := &node{``, 0, nil, nil}
-	var nnode, curNode *node
+func TestRemove(t *testing.T) {
+	var key string
 	for i := 0; i < num; i++ {
-		key, score, value = strconv.FormatInt(rand.Int63(), 10), rand.Int63(), rand.Int()
-		nnode = &node{key, score, value, nil}
-		for curNode = head; curNode.next != nil && curNode.next.score <= nnode.score; curNode = curNode.next {
-		}
-		nnode.next = curNode.next
-		curNode.next = nnode
+		key = strconv.FormatInt(int64(i), 10)
+		sl.Remove(key)
 	}
 }
-*/
-/*
-func TestSnapshot(t *testing.T) {
-	sl.Snapshot()
-}*/
 
 func TestSkiplistIterate(t *testing.T) {
 	it := sl.Iterate()
